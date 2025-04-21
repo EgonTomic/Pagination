@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %} Default {% endblock title %}
+
+{% block content %}
+
+{% if user %}
+<h1>Welcome to Forum, {{ user.username }}</h1>
+{% else %}
+<h1>Welcome to Forum, please register or login</h1>
+{% endif %}
+<br>
+<h1 class="mt-4">Topics</h1>
+<hr>
+<table class="table table-hover table-bordered table-striped mt-4">
+    <tr>
+        <th>Topic</th>
+        <th>Author</th>
+        <th>Date created</th>
+    </tr>
+
+    {% for topic in topics %}
+    <tr>
+        <td><a href="/topic/{{topic.id}}"> {{topic.title}}</a></td>
+        <td>{{topic.author.username}}</td>
+        <td>{{topic.created}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="mt-4 d-flex justify-content-center align-items-center">
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-primary mx-2" href="{{ url_for('index', page=page_obj.previous_page_number) }}">«
+        Previous</a>
+    {% else %}
+    <span class="btn btn-outline-primary mx-2 disabled">« Previous</span>
+    {% endif %}
+    ...
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-primary mx-2" href="{{ url_for('index', page=page_obj.next_page_number) }}">Next »</a>
+    {% else %}
+    <span class="btn btn-outline-primary mx-2 disabled">Next »</span>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} {{topic.title}} {% endblock title %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-5">
+        <h1>Delete Topic {{topic.title}}</h1>
+        <hr>
+        <form method="post">
+            <p>Are you sure you want to delete topic {{topic.title}}</p>
+            <button class="btn btn-danger" type="submit">Yes, delete</button>
+            <a href="/topic/{{topic.id}}" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

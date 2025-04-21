@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} {{topic.title}} {% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        Posted by <span class="badge badge-secondary">{{topic.author.username}}</span> on <span
+            class="badge badge-secondary">{{topic.created.strftime('%d
+            %b
+            %Y')}}
+        </span>
+    </div>
+
+    <div class="card-body">
+        {{topic.text}}
+    </div>
+    {% if user.id == topic.author.id %}
+    <div class="card-footer">
+        <p>
+            <a href="/topic/{{topic.id}}/edit">Edit</a>
+            <a href="/topic/{{topic.id}}/delete">Delete</a>
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}
